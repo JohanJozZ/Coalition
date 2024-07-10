@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/fontello/css/fontello.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/adobeXD.css" />
+    <title>Tech Care</title>
+  </head>
+  <body>
+    <header>
+      <img
+        src="assets/logo/TestLogo.svg"
+        alt="Tech Care Logo"
+        class="nav-logo"
+      />
+      <nav>
+        <a href="#" class="nav-link body-emphasized-14pt">
+          <i class="icon-home"></i> Overview</a
+        >
+        <a href="#" class="nav-link body-emphasized-14pt active">
+          <i class="icon-group"></i> Patients</a
+        >
+        <a href="#" class="nav-link body-emphasized-14pt">
+          <i class="icon-calendar"></i> Schedule</a
+        >
+        <a href="#" class="nav-link body-emphasized-14pt">
+          <i class="icon-chat-bubble"></i> Message</a
+        >
+        <a href="#" class="nav-link body-emphasized-14pt">
+          <i class="icon-credit-card"></i> Transactions</a
+        >
+      </nav>
+      <div class="profile-card">
+        <img
+          src="assets/profile-pictures/senior-woman-doctor-and-portrait-smile-for-health-2023-11-27-05-18-16-utc.png"
+          alt="Profile picture doctor"
+          class="profile-picture"
+        />
+        <div class="profile-text">
+          <span class="body-emphasized-14pt">Dr. Jose Simmons</span>
+          <span class="body-secondary-info-14pt">General Practitioner</span>
+        </div>
+
+        <i class="icon-settings"></i>
+        <i class="icon-more"></i>
+      </div>
+    </header>
+    <main class="container">
+      <div class="column-1">
+        <section class="patients">
+          <div class="section-title">
+            <h2 class="card-title-24pt">
+              Patients <i class="icon-search"></i>
+            </h2>
+          </div>
+          <ul class="patients-list"></ul>
+        </section>
+      </div>
+      <div class="column-2">
+        <section class="diagnosis-history"></section>
+        <section class="diagnostic-list">
+          <div class="section-title">
+            <h2 class="card-title-24pt">Diagnostic List</h2>
+          </div>
+          <div class="diagnostics-table body-regular-14">
+            <div class="table-header table-row body-emphasized-14pt">
+              <div class="table-col-1">Problem/Diagnosis</div>
+              <div class="table-col-2">Description</div>
+              <div class="table-col-3">Status</div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <div class="column-1">
+        <section class="patient">
+          <div class="profile">
+            <img
+              src="#"
+              alt="Profile picture patient"
+              class="profile-picture-full"
+            />
+            <h2 class="card-title-24pt profile-name"></h2>
+          </div>
+          <ul class="patient-info-list">
+            <li class="patient-info">
+              <i class="icon-calendar"></i>
+              <div class="profile-text">
+                <span class="body-regular-14">Date Of Birth</span>
+                <span class="body-emphasized-14pt" id="date-of-birth"></span>
+              </div>
+            </li>
+            <li class="patient-info">
+              <i class="icon-femaleicon" id="icon-gender"></i>
+              <div class="profile-text">
+                <span class="body-regular-14">Gender</span>
+                <span class="body-emphasized-14pt" id="gender"></span>
+              </div>
+            </li>
+            <li class="patient-info">
+              <i class="icon-phoneicon"></i>
+              <div class="profile-text">
+                <span class="body-regular-14">Contact Info</span>
+                <span class="body-emphasized-14pt" id="contact-info"></span>
+              </div>
+            </li>
+            <li class="patient-info">
+              <i class="icon-phoneicon"></i>
+              <div class="profile-text">
+                <span class="body-regular-14">Emergency Contact</span>
+                <span
+                  class="body-emphasized-14pt"
+                  id="emergency-contact"
+                ></span>
+              </div>
+            </li>
+            <li class="patient-info">
+              <i class="icon-insurance"></i>
+              <div class="profile-text">
+                <span class="body-regular-14">Insurance Provider</span>
+                <span
+                  class="body-emphasized-14pt"
+                  id="insurance-provider"
+                ></span>
+              </div>
+            </li>
+          </ul>
+          <button class="main-button">Show All Information</button>
+        </section>
+        <section class="lab-results">
+          <div class="section-title">
+            <h2 class="card-title-24pt">Lab Results</h2>
+          </div>
+          <ul class="lab-list body-regular-14"></ul>
+        </section>
+      </div>
+    </main>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>
