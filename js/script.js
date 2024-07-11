@@ -4,6 +4,12 @@ const labList = document.querySelector('.lab-list');
 
 const profilePictureFull = document.querySelector('.profile-picture-full');
 const profileName = document.querySelector('.profile-name');
+const dateBirth = document.querySelector('#date-of-birth');
+const iconGender = document.querySelector('#icon-gender');
+const gender = document.querySelector('#gender');
+const contactInfo = document.querySelector('#contact-info');
+const emergencyContact = document.querySelector('#emergency-contact');
+const insuranceProvider = document.querySelector('#insurance-provider');
 
 //Generate key to fetch data from API
 let API_user = 'coalition';
@@ -99,6 +105,23 @@ function fillLabResults(data, current) {
 
 function fillProfile(data, current) {
   const person = data[current];
+  console.log(person);
   profileName.innerHTML = person.name;
-  profilePictureFull.setAttribute('src', `${person.profile_picture}`);
+
+  dateBirth.innerHTML = person.date_of_birth;
+  //Use the correct gender icon for the current person
+  if (person.gender === 'Female') {
+    iconGender.setAttribute('class', 'icon-femaleicon');
+  } else {
+    iconGender.setAttribute('class', 'icon-maleicon');
+  }
+  gender.innerHTML = person.gender;
+  contactInfo.innerHTML = person.phone_number;
+  emergencyContact.innerHTML = person.emergency_contact;
+  insuranceProvider.innerHTML = person.insurance_type;
+
+  // We are not using the profile picture from the API because of the low resolution.
+  // Instead we will use the asset provided with a proper 200px size.
+  // This is for the purpose of this SkillTest only, as we're not opening any other profile.
+  // profilePictureFull.setAttribute('src', `${person.profile_picture}`);
 }

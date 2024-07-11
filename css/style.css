@@ -1,10 +1,3 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
   background-color: #f6f7f8;
 }
@@ -64,6 +57,7 @@ nav {
 /*----------------------*/
 .container {
   display: flex;
+  height: 1200px;
 }
 .column-1,
 .column-2 {
@@ -79,13 +73,27 @@ nav {
   flex: 2;
 }
 
-.section-title {
-  margin: 0 0 24px 0;
-}
-.section-title h2 {
+/*------------------------*/
+/* TITLES                */
+/*----------------------*/
+h2 {
   margin: 0;
   display: flex;
   justify-content: space-between;
+  margin: 0 0 24px 0;
+}
+h2 i {
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.diagnosis-history h2,
+.diagnostic-list h2 {
+  margin: 0 0 40px 0;
+}
+
+.lab-results h2 {
+  margin: 0 0 16px 0;
 }
 
 section {
@@ -97,6 +105,11 @@ section {
 /*------------------*/
 /*PATIENTS LIST    */
 /*----------------*/
+.patients {
+  height: 100%;
+  overflow: auto;
+}
+
 .profile-picture {
   height: 100%;
   margin-right: 12px;
@@ -107,6 +120,10 @@ section {
   flex-direction: column;
   padding: 0;
   margin: 0;
+}
+
+.patients-list i {
+  cursor: pointer;
 }
 .patients-card {
   display: flex;
@@ -157,7 +174,57 @@ section {
 .table-col-3 {
   flex: 1;
 }
+/*------------------*/
+/*BIG PROFILE CARD */
+/*----------------*/
+.patient {
+  padding: 32px 20px;
+}
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+.profile-name {
+  margin: 0 0 32px 0;
+}
+.profile-picture-full {
+  height: 200px;
+}
 
+.patient-info-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 40px 0;
+  padding: 0;
+  list-style: none;
+  gap: 24px;
+}
+
+.patient-info {
+  display: flex;
+  height: 42px;
+  align-items: center;
+  gap: 16px;
+}
+.patient-info i {
+  font-size: 42px;
+}
+.patient-info i:before {
+  background-color: #f6f7f8;
+  border-radius: 100%;
+}
+.main-button {
+  background-color: var(--activestate_bg_1);
+  display: block;
+  border: none;
+  height: 41px;
+  padding: 11px 40px;
+  border-radius: 41px;
+  margin: 0 auto;
+}
 /*------------------*/
 /*LAB RESULTS      */
 /*----------------*/
