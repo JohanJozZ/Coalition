@@ -63,6 +63,57 @@
       <div class="column-2">
         <section class="diagnosis-history">
           <h2 class="card-title-24pt">Diagnosis History</h2>
+
+          <div class="blood-pressure-graph">
+            <div class="graph-container">
+              <div class="graph-title">
+                <h2 class="inner-card-title-18pt">Blood Pressure</h2>
+                <div class="dropdown-menu">
+                  <span class="body-regular-14" id="dropdown-current"
+                    >Last 6 months</span
+                  >
+                  <i class="icon-expand"></i>
+                  <ul class="dropdown-list">
+                    <li class="body-regular-14" onclick="graphData(6)">
+                      Last 6 months
+                    </li>
+                    <li class="body-regular-14" onclick="graphData(12)">
+                      Last 12 months
+                    </li>
+                    <li
+                      class="body-regular-14"
+                      onclick="graphData(apiData[currentPatient].diagnosis_history.length)"
+                    >
+                      All time
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <canvas id="chart" class="body-regular-14"></canvas>
+            </div>
+            <div class="legend-container">
+              <div class="pressure-legend">
+                <span class="body-emphasized-14pt">
+                  <span class="legend-color sys-color"></span>Systolic</span
+                >
+                <h2 class="card-title-24pt" id="systolic"></h2>
+                <p>
+                  <i class="" id="average-sys-icon"></i>
+                  <span class="body-regular-14" id="average-sys"></span>
+                </p>
+              </div>
+              <div class="pressure-legend">
+                <span class="body-emphasized-14pt"
+                  ><span class="legend-color dia-color"></span>Diastolic</span
+                >
+                <h2 class="card-title-24pt" id="diastolic"></h2>
+                <p>
+                  <i class="" id="average-dia-icon"></i>
+                  <span class="body-regular-14" id="average-dia"></span>
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
         <section class="diagnostic-list">
           <h2 class="card-title-24pt">Diagnostic List</h2>
@@ -138,7 +189,7 @@
         </section>
       </div>
     </main>
-
+    <script src="node_modules/chart.js/dist/chart.umd.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

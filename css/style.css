@@ -145,6 +145,104 @@ section {
 }
 
 /*------------------*/
+/*GRAPH SECTION    */
+/*----------------*/
+.legend-color {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+}
+.sys-color {
+  background-color: #e66fd2;
+}
+.dia-color {
+  background-color: #8c6fe6;
+}
+.graph-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+.dropdown-menu {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 33%;
+  height: 24px;
+}
+
+.dropdown-menu i {
+  font-size: 8px;
+  padding-right: 10%;
+}
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 24px;
+  z-index: 999;
+  display: none;
+}
+
+.dropdown-menu:hover .dropdown-list {
+  display: block;
+}
+
+.dropdown-list li {
+  display: block;
+  height: 24px;
+  width: 100%;
+  background-color: #f4f0fe;
+}
+.blood-pressure-graph {
+  background-color: #f4f0fe;
+  padding: 16px;
+  border-radius: 14px;
+  display: flex;
+  gap: 5%;
+}
+.graph-container {
+  flex: 2;
+}
+.legend-container {
+  flex: 1;
+}
+.blood-pressure-graph h2 {
+  margin-bottom: 20px;
+}
+.pressure-legend p {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+.pressure-legend h2 {
+  margin: 8px 0 8px 0;
+}
+.pressure-legend i {
+  font-size: 8px;
+  margin-right: 12px;
+}
+.pressure-legend span {
+  display: flex;
+  align-items: center;
+  margin-right: 4px;
+}
+
+.pressure-legend {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+}
+.pressure-legend:first-child {
+  border-bottom: 1px solid #cbc8d4;
+}
+
+/*------------------*/
 /*DIAGNOSTIC LIST  */
 /*----------------*/
 
