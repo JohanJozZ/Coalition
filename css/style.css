@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   background-color: #f6f7f8;
 }
@@ -130,6 +135,9 @@ section {
   height: 48px;
   padding: 16px;
 }
+.patients-card:hover {
+  background-color: var(--activestate_bg_2);
+}
 .profile-text {
   display: flex;
   justify-content: center;
@@ -173,6 +181,9 @@ section {
   width: 33%;
   height: 24px;
 }
+.dropdown-menu span {
+  padding: 3%;
+}
 
 .dropdown-menu i {
   font-size: 8px;
@@ -185,13 +196,14 @@ section {
   list-style: none;
   margin: 0;
   padding: 0;
-  height: 24px;
   z-index: 999;
-  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
 }
-
-.dropdown-menu:hover .dropdown-list {
-  display: block;
+.dropdown-list.hover {
+  opacity: 1;
+  visibility: visible;
 }
 
 .dropdown-list li {
@@ -199,6 +211,10 @@ section {
   height: 24px;
   width: 100%;
   background-color: #f4f0fe;
+  padding: 3%;
+}
+.dropdown-list li:hover {
+  background-color: #dfd4ff;
 }
 .blood-pressure-graph {
   background-color: #f4f0fe;
@@ -216,15 +232,16 @@ section {
 .blood-pressure-graph h2 {
   margin-bottom: 20px;
 }
-.pressure-legend p {
+
+.pressure-legend h2 {
+  margin: 8px 0 8px 0;
+}
+.avg-icon {
   display: flex;
   align-items: center;
   margin: 0;
 }
-.pressure-legend h2 {
-  margin: 8px 0 8px 0;
-}
-.pressure-legend i {
+.avg-icon i {
   font-size: 8px;
   margin-right: 12px;
 }
@@ -242,6 +259,34 @@ section {
   border-bottom: 1px solid #cbc8d4;
 }
 
+.health-status-container {
+  font-family: var(--unnamed-font-family-manrope);
+  display: flex;
+  gap: 3%;
+  margin-top: 3%;
+}
+.health-status-card {
+  padding: 2.4%;
+  flex: 1;
+  border-radius: 14px;
+}
+.health-status-card:nth-child(1) {
+  background-color: #e0f3fa;
+}
+.health-status-card:nth-child(2) {
+  background-color: #ffe6e9;
+}
+.health-status-card:nth-child(3) {
+  background-color: #ffe6f1;
+}
+.health-status-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+.health-status-value {
+  font-size: 30px;
+  font-weight: 800;
+}
 /*------------------*/
 /*DIAGNOSTIC LIST  */
 /*----------------*/

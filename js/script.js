@@ -1,4 +1,6 @@
 const patientsList = document.querySelector('.patients-list');
+//patients card variable will be populated once the patient list renders
+let patientsCard;
 const diagnosticsList = document.querySelector('.diagnostics-table');
 const labList = document.querySelector('.lab-list');
 const profilePictureFull = document.querySelector('.profile-picture-full');
@@ -9,12 +11,7 @@ const gender = document.querySelector('#gender');
 const contactInfo = document.querySelector('#contact-info');
 const emergencyContact = document.querySelector('#emergency-contact');
 const insuranceProvider = document.querySelector('#insurance-provider');
-const currentSys = document.getElementById('systolic');
-const currentDia = document.getElementById('diastolic');
-const avgSys = document.getElementById('average-sys');
-const avgDia = document.getElementById('average-dia');
-const avgDiaIcon = document.getElementById('average-dia-icon');
-const avgSysIcon = document.getElementById('average-sys-icon');
+const dropdown = document.querySelector('.dropdown-menu');
 const dropdownUL = document.querySelector('.dropdown-list');
 const dropdownList = document.querySelectorAll('.dropdown-list li');
 const dropdownCurrent = document.getElementById('dropdown-current');
@@ -48,6 +45,15 @@ fetch('https://fedskillstest.coalitiontechnologies.workers.dev', {
   })
   .catch((error) => error);
 
+function updateCurrentPatient() {
+  fillDiagnosticsList(apiData, currentPatient);
+  fillLabResults(apiData, currentPatient);
+  fillProfile(apiData, currentPatient);
+  //Default months to show on pageload are 6
+  graphData(6);
+  fillGraph();
+}
+
 //Fill out the section with data from patients.
 function fillPatientsList(data) {
   data.map((patient, index) => {
@@ -61,22 +67,22 @@ function fillPatientsList(data) {
 
     //Check the active patient and change background color
     if (index === currentPatient) {
-      li.setAttribute('class', 'active-soft patients-card');
+      li.classList.add('patients-card', 'active-soft');
     } else {
-      li.setAttribute('class', 'patients-card');
+      li.classList.add('patients-card');
     }
     //set all classes and attributes in each element
-    img.setAttribute('class', 'profile-picture');
+    img.classList.add('profile-picture');
     img.setAttribute('src', patient.profile_picture);
     img.setAttribute('alt', 'profile picture');
-    profileText.setAttribute('class', 'profile-text');
-    name.setAttribute('class', 'body-emphasized-14pt');
-    name.innerHTML = patient.name;
+    profileText.classList.add('profile-text');
+    name.classList.add('body-emphasized-14pt');
+    name.textContent = patient.name;
 
-    info.setAttribute('class', 'body-secondary-info-14pt');
-    info.innerHTML = `${patient.gender}, ${patient.age}`;
+    info.classList.add('body-secondary-info-14pt');
+    info.textContent = `${patient.gender}, ${patient.age}`;
 
-    icon.setAttribute('class', 'icon-3-dots icon-left');
+    icon.classList.add('icon-3-dots', 'icon-left');
 
     profileText.appendChild(name);
     profileText.appendChild(info);
@@ -85,6 +91,9 @@ function fillPatientsList(data) {
     li.appendChild(icon);
     patientsList.appendChild(li);
   });
+  //update list of patients in a global variable
+  patientsCard = [...document.querySelectorAll('.patients-card')];
+  handlePatientChange();
 }
 
 let bloodPressureDataSys = [];
@@ -111,71 +120,97 @@ function graphData(months) {
     myChart.update();
   }
 }
+
 function fillGraph() {
+  //target all elements that will be populated with the API data in graph section
+  const currentSys = document.getElementById('systolic');
+  const currentDia = document.getElementById('diastolic');
+  const currentRes = document.getElementById('respiratory-rate');
+  const currentTemp = document.getElementById('temperature');
+  const currentHea = document.getElementById('heart-rate');
+  const avgSys = document.getElementById('average-sys');
+  const avgDia = document.getElementById('average-dia');
+  const avgRes = document.getElementById('average-res');
+  const avgTemp = document.getElementById('average-temp');
+  const avgHea = document.getElementById('average-hea');
+  const avgIcon = document.querySelectorAll('.avg-icon');
+
   //Get data, default period of time for the graph is 6 months.
-  const lastBloodPressure =
-    apiData[currentPatient].diagnosis_history[0].blood_pressure;
+  const lastResult = apiData[currentPatient].diagnosis_history[0];
 
-  currentDia.textContent = lastBloodPressure.diastolic.value;
-  currentSys.textContent = lastBloodPressure.systolic.value;
-  avgDia.textContent = lastBloodPressure.diastolic.levels;
-  avgSys.textContent = lastBloodPressure.systolic.levels;
-
-  if (avgDia.textContent.includes('Lower')) {
-    avgDiaIcon.setAttribute('class', 'icon-arrowdown');
-  } else {
-    avgDiaIcon.setAttribute('class', 'icon-arrowup');
-  }
-  if (avgSys.textContent.includes('Lower')) {
-    avgSysIcon.setAttribute('class', 'icon-arrowdown');
-  } else {
-    avgSysIcon.setAttribute('class', 'icon-arrowup');
-  }
-
-  //Graph
-  myChart = new Chart(chart, {
-    type: 'line',
-    data: {
-      labels: chartLabels,
-      datasets: [
-        {
-          label: 'systolic',
-          data: bloodPressureDataSys,
-          tension: 0.4,
-          borderColor: '#E66FD2',
-          pointRadius: 8,
-          pointBackgroundColor: '#E66FD2',
-        },
-        {
-          label: 'diastolic',
-          data: bloodPressureDataDia,
-          tension: 0.4,
-          borderColor: '#8C6FE6',
-          pointRadius: 8,
-          pointBackgroundColor: '#8C6FE6',
-        },
-      ],
-    },
-    options: {
-      plugins: {
-        legend: {
-          display: false,
-        },
-      },
-      scales: {
-        x: {
-          ticks: {
-            color: '#072635',
-          },
-        },
-        y: {
-          ticks: {
-            color: '#072635',
-          },
-        },
-      },
-    },
+  currentDia.textContent = lastResult.blood_pressure.diastolic.value;
+  currentSys.textContent = lastResult.blood_pressure.systolic.value;
+  currentRes.textContent = `${lastResult.respiratory_rate.value} bpm`;
+  currentTemp.textContent = `${lastResult.temperature.value}°F`;
+  currentHea.textContent = `${lastResult.heart_rate.value} bpm`;
+  avgDia.textContent = lastResult.blood_pressure.diastolic.levels;
+  avgSys.textContent = lastResult.blood_pressure.systolic.levels;
+  avgRes.textContent = lastResult.respiratory_rate.levels;
+  avgTemp.textContent = lastResult.temperature.levels;
+  avgHea.textContent = lastResult.heart_rate.levels;
+  //create an icon according to lower or higher averages
+  avgIcon.forEach((line) => {
+    if (line.querySelector('span').textContent.includes('Lower')) {
+      line.querySelector('i').classList.add('icon-arrowdown');
+      line.querySelector('i').style.display = 'inline-block';
+    } else if (line.querySelector('span').textContent.includes('Higher')) {
+      line.querySelector('i').classList.add('icon-arrowup');
+      line.querySelector('i').style.display = 'inline-block';
+    } else {
+      line.querySelector('i').style.display = 'none';
+    }
   });
+
+  //Create the chart if it doesnt exist yet.
+  //Reuse this function to update the legend if we are checking a different patient.
+  if (!myChart) {
+    myChart = new Chart(chart, {
+      type: 'line',
+      data: {
+        labels: chartLabels,
+        datasets: [
+          {
+            label: 'systolic',
+            data: bloodPressureDataSys,
+            tension: 0.4,
+            borderColor: '#E66FD2',
+            pointRadius: 8,
+            pointBackgroundColor: '#E66FD2',
+          },
+          {
+            label: 'diastolic',
+            data: bloodPressureDataDia,
+            tension: 0.4,
+            borderColor: '#8C6FE6',
+            pointRadius: 8,
+            pointBackgroundColor: '#8C6FE6',
+          },
+        ],
+      },
+      options: {
+        plugins: {
+          legend: {
+            display: false,
+          },
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#072635',
+            },
+            grid: {
+              display: false,
+            },
+          },
+          y: {
+            ticks: {
+              color: '#072635',
+            },
+          },
+        },
+      },
+    });
+  }
 }
 
 function fillDiagnosticsList(data, current) {
@@ -226,12 +261,35 @@ function fillProfile(data, current) {
 
   // We are not using the profile picture from the API because of the low resolution.
   // Instead we will use the asset provided with a proper 200px size.
-  // This is for the purpose of this SkillTest only, as we're not opening any other profile.
-  // profilePictureFull.setAttribute('src', `${person.profile_picture}`);
+  if (currentPatient === 3) {
+    profilePictureFull.setAttribute(
+      'src',
+      'assets/profile-pictures/big-profile-pic.png'
+    );
+  } else {
+    profilePictureFull.setAttribute('src', `${person.profile_picture}`);
+  }
 }
 
-dropdownList.forEach((li) => {
-  li.addEventListener('click', (e) => {
-    dropdownCurrent.textContent = e.target.innerHTML;
-  });
+dropdown.addEventListener('mouseover', () => {
+  dropdownUL.classList.add('hover');
 });
+
+dropdown.addEventListener('mouseout', () => {
+  dropdownUL.classList.remove('hover');
+});
+
+function handlePatientChange() {
+  patientsCard.forEach((patient) => {
+    patient.addEventListener('click', (e) => {
+      currentPatient = patientsCard.indexOf(e.currentTarget);
+      patientsCard.forEach((li) => {
+        if (li.classList.value.includes('active-soft')) {
+          li.classList.remove('active-soft');
+        }
+      });
+      e.currentTarget.classList.add('active-soft');
+      updateCurrentPatient();
+    });
+  });
+}
