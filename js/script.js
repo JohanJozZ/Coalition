@@ -46,6 +46,11 @@ fetch('https://fedskillstest.coalitiontechnologies.workers.dev', {
   .catch((error) => error);
 
 function updateCurrentPatient() {
+  //Clear the data from the old patient
+  diagnosticsList.replaceChildren(diagnosticsList.firstElementChild);
+  labList.replaceChildren();
+
+  //Run functions to populate data again
   fillDiagnosticsList(apiData, currentPatient);
   fillLabResults(apiData, currentPatient);
   fillProfile(apiData, currentPatient);
@@ -214,6 +219,8 @@ function fillGraph() {
 }
 
 function fillDiagnosticsList(data, current) {
+  //Clear data in case this function ran before
+
   data[current].diagnostic_list.map((person) => {
     const name = document.createElement('div');
     const description = document.createElement('div');

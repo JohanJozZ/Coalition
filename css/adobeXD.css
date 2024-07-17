@@ -82,3 +82,9 @@
   letter-spacing: var(--unnamed-character-spacing-0);
   color: var(--unnamed-color-072635);
 }
+
+@media (max-width: 1200px) {
+  :root {
+    --unnamed-font-size-14: 12px;
+  }
+}

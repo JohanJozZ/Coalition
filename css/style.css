@@ -12,8 +12,6 @@ body {
 /*----------------*/
 header {
   display: flex;
-  width: -webkit-fill-available;
-  height: 48px;
   align-items: center;
   justify-content: space-between;
   background-color: #ffffff;
@@ -29,7 +27,6 @@ header .profile-text {
 
 nav {
   display: flex;
-  gap: 32px;
 }
 .nav-logo {
   height: 48px;
@@ -48,6 +45,7 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 255px;
 }
 .active {
   background-color: var(--activestate_bg_1);
@@ -62,7 +60,7 @@ nav {
 /*----------------------*/
 .container {
   display: flex;
-  height: 1200px;
+  height: 1130px;
 }
 .column-1,
 .column-2 {
@@ -112,7 +110,19 @@ section {
 /*----------------*/
 .patients {
   height: 100%;
-  overflow: auto;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #e3e4e6;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb {
+  background: #072635;
+  border-radius: 3px;
 }
 
 .profile-picture {
@@ -125,6 +135,9 @@ section {
   flex-direction: column;
   padding: 0;
   margin: 0;
+  overflow: auto;
+  height: 95%;
+  margin-right: -15px;
 }
 
 .patients-list i {
@@ -133,7 +146,7 @@ section {
 .patients-card {
   display: flex;
   height: 48px;
-  padding: 16px;
+  padding: 5%;
 }
 .patients-card:hover {
   background-color: var(--activestate_bg_2);
@@ -221,7 +234,7 @@ section {
   padding: 16px;
   border-radius: 14px;
   display: flex;
-  gap: 5%;
+  gap: 30px;
 }
 .graph-container {
   flex: 2;
@@ -229,13 +242,11 @@ section {
 .legend-container {
   flex: 1;
 }
+
 .blood-pressure-graph h2 {
   margin-bottom: 20px;
 }
 
-.pressure-legend h2 {
-  margin: 8px 0 8px 0;
-}
 .avg-icon {
   display: flex;
   align-items: center;
@@ -244,6 +255,9 @@ section {
 .avg-icon i {
   font-size: 8px;
   margin-right: 12px;
+}
+.pressure-legend h2 {
+  margin: 8px 0 8px 0;
 }
 .pressure-legend span {
   display: flex;
@@ -254,6 +268,7 @@ section {
 .pressure-legend {
   padding-bottom: 16px;
   margin-bottom: 16px;
+  min-width: 160px;
 }
 .pressure-legend:first-child {
   border-bottom: 1px solid #cbc8d4;
@@ -387,4 +402,62 @@ section {
 }
 .lab-list li:hover {
   background-color: #f6f7f8;
+}
+
+@media (max-width: 1200px) {
+  .nav-logo {
+    height: 24px;
+  }
+  .profile-card img {
+    display: none;
+  }
+  header {
+    padding: 12px 12px;
+    margin: 5px;
+  }
+  header .profile-text {
+    margin: 0;
+    border-right: 0;
+  }
+  .nav-link {
+    padding: 12px 8px;
+  }
+  .column-1,
+  .column-2 {
+    margin: 5px;
+    gap: 10px;
+  }
+  section {
+    padding: 10px;
+  }
+  .patient {
+    padding: 16px 10px;
+  }
+  .patients-list {
+    margin-right: auto;
+  }
+  .main-button {
+    padding: 11px 20px;
+  }
+  .health-status-title {
+    font-size: 14px;
+  }
+  .health-status-value {
+    font-size: 20px;
+  }
+  .blood-pressure-graph {
+    gap: 5px;
+  }
+  .patients-card {
+    padding: 8px;
+  }
+}
+
+@media (max-width: 968px) {
+  header {
+    display: none;
+  }
+  .column-1:first-child {
+    display: none;
+  }
 }
