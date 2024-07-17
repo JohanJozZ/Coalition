@@ -74,6 +74,7 @@ nav {
 }
 .column-2 {
   flex: 2;
+  max-width: 50%;
 }
 
 /*------------------------*/
@@ -90,9 +91,8 @@ h2 i {
   cursor: pointer;
 }
 
-.diagnosis-history h2,
-.diagnostic-list h2 {
-  margin: 0 0 40px 0;
+.large-margin-bottom {
+  margin-bottom: 40px;
 }
 
 .lab-results h2 {
@@ -190,17 +190,17 @@ section {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  width: 33%;
   height: 24px;
+  width: 120px;
+  justify-content: space-evenly;
 }
 .dropdown-menu span {
   padding: 3%;
+  text-wrap: nowrap;
 }
 
 .dropdown-menu i {
   font-size: 8px;
-  padding-right: 10%;
 }
 .dropdown-list {
   position: absolute;
@@ -236,11 +236,22 @@ section {
   display: flex;
   gap: 30px;
 }
+.canvas-container {
+  position: relative;
+  width: 100%;
+  min-height: 200px;
+}
+
 .graph-container {
   flex: 2;
+  max-width: 66%;
 }
 .legend-container {
   flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+  flex-direction: column;
 }
 
 .blood-pressure-graph h2 {
@@ -266,13 +277,22 @@ section {
 }
 
 .pressure-legend {
-  padding-bottom: 16px;
-  margin-bottom: 16px;
   min-width: 160px;
 }
-.pressure-legend:first-child {
-  border-bottom: 1px solid #cbc8d4;
+
+.legend-container::before {
+  align-self: stretch;
+  content: '';
+  border: 1px solid #cbc8d4;
 }
+
+.legend-container .pressure-legend:first-child {
+  order: -1;
+}
+
+/* .pressure-legend:first-child {
+  border-bottom: 1px solid #cbc8d4;
+} */
 
 .health-status-container {
   font-family: var(--unnamed-font-family-manrope);
@@ -405,6 +425,18 @@ section {
 }
 
 @media (max-width: 1200px) {
+  h2 {
+    margin: 0 0 10px 0;
+  }
+  .large-margin-bottom {
+    margin-bottom: 10px;
+  }
+  .profile-name {
+    margin-bottom: 10px;
+  }
+  .profile-container {
+    gap: 10px;
+  }
   .nav-logo {
     height: 24px;
   }
@@ -430,11 +462,23 @@ section {
   section {
     padding: 10px;
   }
+
+  .graph-container {
+    min-width: 100%;
+  }
+  .legend-container {
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+  }
   .patient {
     padding: 16px 10px;
   }
   .patients-list {
     margin-right: auto;
+  }
+  .patient-info {
+    gap: 0;
   }
   .main-button {
     padding: 11px 20px;
@@ -447,9 +491,14 @@ section {
   }
   .blood-pressure-graph {
     gap: 5px;
+
+    flex-wrap: wrap;
   }
   .patients-card {
     padding: 8px;
+  }
+  .pressure-legend {
+    min-width: 140px;
   }
 }
 
@@ -459,5 +508,8 @@ section {
   }
   .column-1:first-child {
     display: none;
+  }
+  .column-2 {
+    max-width: 66%;
   }
 }
